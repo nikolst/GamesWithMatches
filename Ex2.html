@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Образователен сайт</title>
+
+	<script src="suica.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="pageStyle.css">
+	
+	<script>
+        
+        function main()
+        {
+           p = new Suica();
+		   
+		   lookAt([10,0,0], [0,0,0], [0,0,1]);
+			orthographic(-1000, 1000);
+           
+           p.gl.canvas.addEventListener('mousedown',mouseDown);
+           p.gl.canvas.addEventListener('mouseup',mouseUp);
+           p.gl.canvas.addEventListener('mousemove',mouseMove);
+            
+			// създаване на клечката като групов обект
+			match = group([
+			cuboid([100,250,30],[10,10,200]).custom({color: [0.9,0.7,0.2]}), // тяло на клечката
+			spheroid([100,250,120],[12,12,20]).custom({color: [0.7,0.2,0]}) // глава на клечката
+			]);
+            match.custom({interactive:true});
+			match.merge();
+            
+             match.custom({focus:[-1,-1,1]}); // крайна лява долна клечка
+             ma1 = sameAs(match).custom({focus:[1,1,1],center:[100,-470,100]}); // крайна лява горна клечка
+             ma2 = sameAs(match).custom({focus:[1,0,-1],center:[100,-430,80]});// крайна лява долна клечка
+             ma3 = sameAs(match).custom({focus:[1,1,1],center:[100,-345,220]});// горна лява среда клечка
+             ma4 = sameAs(match).custom({focus:[-1,-1,1],center:[100,130,110]});// горна средна лява среда
+             ma5 = sameAs(match).custom({focus:[1,0,-1],center:[100,-300,190]});// хипотенуза горе среда
+             ma6 = sameAs(match).custom({focus:[1,1,1],center:[100,-350,-10]});// среда  катет на 2 триъг.
+             ma7 = sameAs(match).custom({focus:[-1,-1,1],center:[100,120,-130]});// крайна лява най-долна клечка
+             ma8 = sameAs(match).custom({focus:[1,0,-1],center:[100,-300,-40]});// хипотенуза долу среда
+             ma9 = sameAs(match).custom({focus:[1,1,1],center:[100,-230,-130]});// най-долна дясна
+             ma10 = sameAs(match).custom({focus:[-1,-1,1],center:[100,260,-10]});// долен ромб дясна горе
+             ma11 = sameAs(match).custom({focus:[1,1,1],center:[100,-215,120]});// горен ромб дясна долна
+             ma12 = sameAs(match).custom({focus:[-1,-1,1],center:[100,250,230]});// горен ромб горна дясна
+             ma13 = sameAs(match).custom({focus:[1,0,-1],center:[100,-170,80]});// дясна хипотенуза
+             ma14 = sameAs(match).custom({focus:[1,1,1],center:[100,-90,-10]});// крайна дясна долна клечка
+             ma15 = sameAs(match).custom({focus:[-1,-1,1],center:[100,380,110]});// крайна лява долна клечка
+        }
+        
+        var obj;
+
+        // при натискане с мишката клечката изчезва
+		function mouseDown(event)
+		{
+			var x = event.clientX;
+			var y = event.clientY;
+			obj = p.objectAtPoint(x,y);
+            if(obj){
+                obj.visible = false;
+            }
+		}
+		
+		function mouseUp(event)
+		{
+			obj = undefined;
+		}
+		
+		function mouseMove(event)
+		{
+		
+			var x = event.clientX - event.target.offsetLeft - event.target.offsetWidth/2;
+			var y = -(event.clientY- event.target.offsetTop - event.target.offsetHeight/2);
+			
+			if (obj){
+				obj.center = [0,x,y]
+				console.log(obj.center);
+			}
+		}
+       
+		// показване и скриване на секция
+		function toggle()
+        {
+            var x = document.getElementById("solution_1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+                }
+        }
+        
+         // оразмеряване на страницата
+        function myFunction() {
+            var w = window.outerWidth;
+            var h = window.outerHeight;
+            var txt = "Window size: width=" + w + ", height=" + h;
+            document.getElementById("demo").innerHTML = txt;
+        }
+        
+      
+        
+    </script>	
+</head>
+
+<body onload="main()" onresize="myFunction()">
+
+<!-- Заглавие и подзаглавие -->
+    <h1>Триъгълници за "подрязване"</h1>
+    
+    <!-- Задача 2 -->
+    <div class="section">
+        <a id="1"><h2>Задача 2</h2></a>
+        <p>Дадените 16 кибритени клечки образуват 8 противоположни равностранни триъгълника. <b>Премахнете 4</b> от кибритените клечки, така че на полето да останат точно 4 равностранни триъгълника от дадените 8 в началото. Премахването става като кликнете с мишката върху избраната от Вас клечка.</p>
+    
+    
+     <!-- Интерактивно поле -->
+        <a id="1"><h2>Интерактивно поле</h2></a>
+        
+        
+       <!-- <div id="instructions" style="display: none;">	-->
+		
+	<!-- рисувателно поле -->
+		<canvas width="900" height="600">
+		</canvas>
+       
+  
+   
+    
+     <!-- Решение на задачата -->
+    <ul style="list-style-type:none;">
+       
+        <li> <div class="button" onclick="toggle()">Решение на задачата</div></li>
+         <div id="solution_1" style="display: none">
+        <p>Както можете да забележите на посочените фигури отдолу, премахнатите клечки трябва да са:  </p>
+        <table>
+           
+            <tr><img id="pic" src="defaultEx2.PNG" alt="Начална задача"></tr>
+            <tr><img id="pic" src="solvedEx2.PNG" alt="Краен резултат"></tr>
+            
+        </table>
+    </div>
+        <li> <a caption button href="pageVision.html"><h3>- Назад -</h3></a></li>
+    </ul>
+       
+   
+    </div>
+
+	<noscript>
+		Искаме JavaScript, но няма!
+	</noscript>
+	
+</body>
+</html>

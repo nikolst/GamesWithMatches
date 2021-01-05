@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Образователен сайт</title>
+
+	<script src="suica.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="pageStyle.css">
+	
+	<script>
+    function main()
+        {
+           p = new Suica();
+		   
+		   lookAt([10,0,0], [0,0,0], [0,0,1]);
+           orthographic(-1000, 1000);
+           
+           p.gl.canvas.addEventListener('mousedown',mouseDown);
+           p.gl.canvas.addEventListener('mouseup',mouseUp);
+           p.gl.canvas.addEventListener('mousemove',mouseMove);
+            
+			// създаване на клечката като групов обект
+			match = group([
+			cuboid([10,350,0],[10,10,150]).custom({color: [0.9,0.7,0.2]}), // тяло на клечката
+			spheroid([10,350,70],[12,12,16]).custom({color: [0.7,0.2,0]}) // глава на клечката
+			]);
+            match.custom({interactive:true});
+			match.merge();
+            
+            match.custom({focus:[-1,-1,1]}); // предна долна клечка тяло
+            m1 = sameAs(match).custom({focus:[-1,-1,-1], center:[-100,-10,100]}); // предна горна клечка тяло
+            m2 = sameAs(match).custom({focus:[1,1,-1],center:[100,-400,100]}); // задна горна клечка тяло
+            m3 = sameAs(match).custom({focus:[-1,1,1],center:[100,90,0]}); // задна долна клечка тяло
+            m4 = sameAs(match).custom({focus:[-1,-1,-1],center:[100,80,190]}); // горна перка
+            m5 = sameAs(match).custom({focus:[-1,-1,1],center:[-100,90,-90]}); // долна перка
+            m6 = sameAs(match).custom({focus:[1,1,1],center:[100,-310,100]}); //опашка горна
+            m7 = sameAs(match).custom({focus:[-1,1,-1],center:[100,190,10]}); // опашка долна
+           
+            
+        }
+        
+        // движения на мишката 
+        var obj;
+
+		function mouseDown(event)
+		{
+			var x = event.clientX;
+			var y = event.clientY;
+			obj = p.objectAtPoint(x,y);
+		}
+		
+		function mouseUp(event)
+		{
+			obj = undefined;
+		}
+		
+		function mouseMove(event)
+		{
+		
+			var x = event.clientX - event.target.offsetLeft- event.target.offsetWidth/2;
+			var y = -(event.clientY- event.target.offsetTop - event.target.offsetHeight/2);
+			
+			if (obj){
+				obj.center = [0,x,y]
+				console.log(obj.center);
+			}
+		}
+       
+		// показване и скриване на секция
+		function toggle()
+        {
+            var x = document.getElementById("solution_1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+                }
+        }
+        
+        
+        // оразмеряване на страницата
+        function myFunction() {
+            var w = window.outerWidth;
+            var h = window.outerHeight;
+            var txt = "Window size: width=" + w + ", height=" + h;
+            document.getElementById("demo").innerHTML = txt;
+}
+    </script>	
+</head>
+
+<body onload="main()" onresize="myFunction()">
+
+<!-- Заглавие и подзаглавие -->
+    <h1>Риба</h1>
+    
+    <!-- Задача 1 -->
+    <div class="section">
+        <a id="1"><h2>Задача 1</h2></a>
+        <p>Как ще промените посоката на рибата (в хоризонтално положение), ако трябва да преместите <b>точно 3</b> кибритени клечки?</p>
+    
+    
+     <!-- Интерактивно поле -->
+        <a id="1"><h2>Интерактивно поле</h2></a>
+        
+		
+	<!-- рисувателно поле -->
+		<canvas width="900" height="600">
+		</canvas>
+       
+  
+     <!-- Решение на задачата -->
+       <ul style="list-style-type:none;">
+           <li> <div class="button" onclick="toggle()">Решение на задачата</div></li>
+         <div id="solution_1" style="display: none">
+         <br>
+        <p>За да промените посоката на рибата е необходимо да премахнете горната клечка от предната част на главата на рибата, горната перка и горната част от опашката (както е показано със жълто на изображението вляво) и да ги поставите на местата указани на изображението в дясно оцветени в розово:</p>
+       
+        <table>
+           
+            <tr><img id="pic" src="defaultFish.PNG" alt="Начална риба"></tr>
+            <tr><img id="pic" src="solvedFish.PNG" alt="Направена риба"></tr>
+            
+        </table>    
+           
+    </div>
+    <li> <a caption button href="pageVision.html"><h3>- Назад -</h3></a></li>
+          
+    </ul>
+    </div>
+	<noscript>
+		Искаме JavaScript, но няма!
+	</noscript>
+	
+</body>
+</html>

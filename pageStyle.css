@@ -1,0 +1,144 @@
+body
+{
+    width: 1000px;
+    margin: auto;
+    text-align: center;
+    background-color: cornsilk;
+}
+
+h1 
+{
+    font-size: 2em;
+    margin-bottom: 0;
+    color: crimson;
+}
+
+h4
+{
+    margin: 0.5em 0 0.5em 0;
+    font-weight: normal;
+    color: crimson;
+}
+
+h2
+{
+    margin-top: 0;
+    margin-left: 1em;
+    margin-bottom: 0;
+    padding: 1em 0 0.7em 0;
+    color: firebrick;
+    text-shadow: 0px 0 10px none;    
+    text-align: left;
+}
+
+h3
+{
+    margin: 0;
+    text-align: center;
+    color: firebrick;
+}
+
+div.section
+{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: solid 1px Salmon;
+    padding: 0 0 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px Salmon inset;
+    background: linear-gradient(PeachPuff,PapayaWhip);
+}
+
+
+p
+{
+    margin-top: 0.5em;
+    margin-left: 1.5em;
+    margin-right: 1em;
+    text-align: justify;
+    font-size: 1.1em;
+}
+
+canvas, .button
+{
+	display: block;
+	margin: 0.5em auto 0 auto;
+	border: solid 3px Salmon;
+	box-shadow: 0 0 25px 0px Salmon;
+	background-color: azure;
+    border-radius: 10px;
+}
+
+div.button
+{
+    margin-top: 3em;
+    margin-bottom: 3em;
+    display: inline;
+    color: crimson;
+    cursor: pointer;
+    border-radius: 10px;
+    border: solid 3px Pink;
+    background-color: Pink;
+    position: relative;
+    text-align: center;
+}
+
+.button
+{
+  display: block;
+  width: 40%;
+  margin-left: 2px;
+  margin-right: 2px;
+  border: none;
+  background-color: Pink;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+ 
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button: hover
+{
+    background-color: cyan;
+    color: black;
+}
+
+a:link
+{
+    text-decoration: none;
+    
+}
+
+li 
+{
+    margin-top: 20px;
+}
+
+#pic
+{
+    border: none;
+    border-radius: 30px;
+    max-width: 100%;
+    width: 300px;
+    height: 200px;
+    padding: 5px 30px 5px 30px;
+}
+
+#lists
+{
+    text-align: left;
+}
+
+#def
+{
+    list-style-type: none;
+}
+
+
+
+
+

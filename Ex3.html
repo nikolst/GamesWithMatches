@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Образователен сайт</title>
+
+	<script src="suica.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="pageStyle.css">
+	
+	<script>
+        
+        function main()
+        {
+           p = new Suica();
+		   
+		   lookAt([10, 0, 0], [0, 0, 0], [0, 0, 1]);
+			orthographic(-1000, 1000);
+           
+           p.gl.canvas.addEventListener('mousedown',mouseDown);
+           p.gl.canvas.addEventListener('mouseup',mouseUp);
+           p.gl.canvas.addEventListener('mousemove',mouseMove);
+            
+			// създаване на клечката като групов обект
+			match = group([
+			cuboid([10,-370,-100],[10,10,100]).custom({color: [0.9,0.7,0.2]}), // тяло на клечката
+			spheroid([10,-370,-40],[12,12,16]).custom({color: [0.7,0.2,0]}) // глава на клечкатa
+			]);
+            //match.custom({visibility:false});
+            match.custom({interactive:true});
+			match.merge();
+            
+            match.custom({focus:[0,0,0]}); // 6
+            match1 = sameAs(match).custom({focus:[0,0,0],center:[100,0,130]}); // 6
+            match2 = sameAs(match).custom({focus:[0,1,0],center:[100,-215,100]}); // 6
+            match3 = sameAs(match).custom({focus:[0,1,0],center:[100,-215,-30]}); // 6
+            match4 = sameAs(match).custom({focus:[0,1,0],center:[100,-215,-135]}); // 6
+            match5 = sameAs(match).custom({focus:[0,0,0],center:[100,120,0]}); // 6
+            match6 = sameAs(match).custom({focus:[0,1,0],center:[100,-70,-30]}); // +
+            match7 = sameAs(match).custom({focus:[0,0,0],center:[100,200,60]}); // +
+            match8 = sameAs(match).custom({focus:[0,0,0],center:[50,300,-10]}); // 6
+            match9 = sameAs(match).custom({focus:[0,0,0],center:[50,300,120]}); // 6
+            match10 = sameAs(match).custom({focus:[0,1,0],center:[100,85,95]}); // 6
+            match11 = sameAs(match).custom({focus:[0,1,0],center:[100,85,-40]}); // 6
+            match12 = sameAs(match).custom({focus:[0,1,0],center:[100,85,-145]}); // 6
+            match13 = sameAs(match).custom({focus:[0,0,0],center:[100,420,-10]}); // 6
+            match14 = sameAs(match).custom({focus:[0,1,0],center:[100,220,-35]}); // =
+            match15 = sameAs(match).custom({focus:[0,1,0],center:[100,220,-70]}); // =
+            match16 = sameAs(match).custom({focus:[0,1,0],center:[100,380,90]}); // 2
+            match17 = sameAs(match).custom({focus:[0,1,0],center:[100,380,-35]}); // 2
+            match18 = sameAs(match).custom({focus:[0,1,0],center:[100,380,-145]});
+            match19 = sameAs(match).custom({focus:[0,0,0],center:[100,710,110]}); // 2
+            match20 = sameAs(match).custom({focus:[0,0,0],center:[100,600,-10]}); // 2
+            
+        }
+        
+        var obj;
+
+		function mouseDown(event)
+		{
+			var x = event.clientX;
+			var y = event.clientY;
+			obj = p.objectAtPoint(x,y);
+		}
+		
+		function mouseUp(event)
+		{
+			obj = undefined;
+		}
+		
+		function mouseMove(event)
+		{
+		
+			var x = event.clientX - event.target.offsetLeft - event.target.offsetWidth/2;
+			var y = -(event.clientY- event.target.offsetTop - event.target.offsetHeight/2);
+			
+			if (obj){
+				obj.center = [0,x,y]
+				console.log(obj.center);
+			}
+		}
+    
+		// показване и скриване на секция
+		function toggle()
+        {
+            var x = document.getElementById("solution_1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+                }
+        }
+        
+         // оразмеряване на страницата
+        function myFunction() {
+            var w = window.outerWidth;
+            var h = window.outerHeight;
+            var txt = "Window size: width=" + w + ", height=" + h;
+            document.getElementById("demo").innerHTML = txt;
+}
+        
+    </script>	
+</head>
+
+<body onload="main()", onresize="myFunction()">
+
+<!-- Заглавие и подзаглавие -->
+    <h1>Алгебричен израз</h1>
+    
+    <!-- Задача 3 -->
+    <div class="section">
+        <a id="1"><h2>Задача 3</h2></a>
+        <p>Преместете <b>точно една</b> кибритена клечка, така че да се получи вярно числово равенство.<br> 
+            <br><i>*За записване на числата в задачата се използват само и единствено арабски цифри!</i>
+        </p>
+    
+    
+     <!-- Интерактивно поле -->
+        <a id="1"><h2>Интерактивно поле</h2></a>
+        
+		
+	<!-- рисувателно поле -->
+		<canvas width="900" height="600">
+		</canvas>
+   
+    
+     <!-- Решение на задачата -->
+    <ul style="list-style-type:none;">
+       
+        <li> <div class="button" onclick="toggle()">Решение на задачата</div></li>
+         <div id="solution_1" style="display: none">
+        <p>За вярното решение на задачата е необходимо да преместите клечката от знака за събиране, който в последствие става знака за изваждане и да образувате от шестицата осмица, така както е показано на фигурите: </p>
+        <table>
+           
+            <tr><img id="pic" src="defaultEx3.PNG" alt="Начална задача"></tr>
+            <tr><img id="pic" src="solvedEx3.PNG" alt="Краен резултат"></tr>
+            
+        </table>
+    </div>
+          <li> <a caption button href="pageVision.html"><h3>- Назад -</h3></a></li>
+    </ul>
+   
+    </div>
+
+	<noscript>
+		Искаме JavaScript, но няма!
+	</noscript>
+</body>
+</html>
