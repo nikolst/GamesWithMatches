@@ -1,5 +1,5 @@
 # GamesWithMatches
-A university project realised with HTML, CSS and JavaScript languages, using the JavaScript library SUICA.
+A university project realised with HTML, CSS and JavaScript programming languages, using the JavaScript library SUICA.
 
 Проектът "Игри с кибритени клечки" е реализиран през февруари 2019 година с учебна цел. Разработката представя урок по математика, включващ математически понятия, изучавани в училище, с помощта на кибритени клечки и фигурите, които се образуват при разместването им с мишката.
 GamesWithMatches се състои от 4 уеб страници - главна (pageVision.html), и по една уеб страница за всяка от задачите (съответно Ex1.html, Ex2.html и Ex3.html).
